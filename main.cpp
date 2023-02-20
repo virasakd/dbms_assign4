@@ -23,6 +23,17 @@ int main(int argc, char* const argv[]) {
     emp_index.createFromFile("Employee.csv");
     
     // Loop to lookup IDs until user is ready to quit
+    while (1) {
+        string choice;
+        int id;
+        printf("Please enter either desired ID or 'quit' to end program.\n");
+        cin >> choice;
+        if (choice == "quit") {
+            break;
+        }
+        id = stoi(choice);
+        // findRecsordById(id);
+    }
     
 
     return 0;
