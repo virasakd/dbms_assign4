@@ -32,7 +32,18 @@ int main(int argc, char* const argv[]) {
             break;
         }
         id = stoi(choice);
-        // findRecsordById(id);
+        Record desired_record = emp_index.findRecordById(id);
+        // check if desired_record has null value for ID (-1)
+        //      print error if so
+        if (desired_record.id == -1) {
+            printf("ID: %d NOT FOUND\n", id);
+            // desired_record.print();
+        }
+        else {
+            desired_record.print();
+        }
+        // printf("desired_record.id: %d \n", desired_record.id);
+        // findRecordById(id);
     }
     
 
