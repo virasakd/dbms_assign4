@@ -88,14 +88,15 @@ private:
 
 
         // first check if the 
+        // first check if the _bit maps match?_
         
         // these are the number of bits we want to compare
         int bit_mask = (1 << i) - 1;
 
         if ((record.id & bit_mask) >= (n & bit_mask)) {
-            cout << "last two bits are equal" <<  bit_mask << " " << record.id << endl;
+            cout << "last two bits are equal " <<  bit_mask << " " << record.id << endl;
         }else{
-            cout << "last are not equal" << bit_mask <<" " << record.id  << endl;
+            cout << "last are not equal " << bit_mask << " " << record.id  << endl;
         }
 
         
@@ -182,9 +183,19 @@ public:
 
     }
 
+    // Record(vector<std::string> fields) {
+    //     id = stoi(fields[0]);
+    //     name = fields[1];
+    //     bio = fields[2];
+    //     manager_id = stoi(fields[3]);
+    // }
+
     // Given an ID, find the relevant record and print it
     Record findRecordById(int id) {
-        
+
+        // if record not found, give record null (-1) values
+        Record null_record = Record({"-1", "-1", "-1", "-1"});
+        return null_record;
     }
 
  
