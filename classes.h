@@ -97,17 +97,45 @@ private:
         
         // these are the number of bits we want to compare
         int bit_mask = (1 << i) - 1;
+        // int bit_mask = (1 << i);
 
-        // check if last i bits of haskey match the bit mask
+        // check if last i bits of hashkey are >= to n, flip if so
         // importantBits = last i bits of hashKey
         // if ((record.id & bit_mask) >= (n & bit_mask)) {
-        if ((hashkey & bit_mask) >= (n & bit_mask)) {
+        if ((hashkey & bit_mask) >= n) {
             // cout << "last two bits are equal " <<  bit_mask << " " << hashkey << endl;
-            cout << "last two bits are equal " <<  bit_mask << " " << hashkey << ": hashkey & bit_mask(" << 
-                    (hashkey & bit_mask) << "), n & bit_mask(" << (n & bit_mask) << ")" <<  endl;
-            
+            cout << "last two bits are equal or greater " <<  bit_mask << " " << hashkey << ": hashkey & bit_mask(" << 
+                    (hashkey & bit_mask) << "), n(" << n << ")" <<  endl;
+            // for (int idx = 0; idx < count; ++idx)
+            // {
+                // 'flip the MSB of importantBits' (ie hashkey)
+                hashkey = (hashkey & bit_mask) ^ (1<<i);
+            // }
+
+                // cout << "last two bits are equal or greater " <<  bit_mask << " " << hashkey << ": hashkey & bit_mask(" << 
+                //     (hashkey & bit_mask) << "), n(" << n << ")" <<  endl;
+
         }else{
-            cout << "last are not equal " << bit_mask << " " << hashkey  << endl;
+            cout << "last are not equal " 
+                        << "bit_mask: "<<  bit_mask << " " 
+                        << "hashkey: "<< hashkey 
+                        << ", i: " << i
+                        << "; hashkey & bit_mask(" << (hashkey & bit_mask) 
+                        << "), n(" << n << ")" <<  endl;
+
+
+
+                    // hashkey = hashkey ^ (1<<bit_mask);
+                    // hashkey = (hashkey & bit_mask) ^ (1<<n);
+                    // cout << "last are not equal " 
+                    //     << "bit_mask: "<<  bit_mask << " " 
+                    //     << "hashkey: "<< hashkey 
+                    //     << ", i: " << i
+                    //     << ", (1 << i): " << (1 << i)
+                    //     << ", (1 << i) -1: " << (1 << i) - 1
+                    //     << "; hashkey & bit_mask(" << (hashkey & bit_mask) 
+                    //     << "), n(" << n << ")" <<  endl;
+
         }
 
         
