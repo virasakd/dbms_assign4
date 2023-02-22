@@ -88,9 +88,9 @@ private:
 
 
         // find hashkey: ID % 2^8
-        int hashkey = record.id % (int)pow((double)2, (double)8);
-        cout << "hashkey: " << hashkey << "= " << record.id << " (record.id) % " << (pow((double)2, (double)8)) << "(2^8)" 
-                << endl;
+        int hashkey = findHashKey(record.id);
+        // cout << "hashkey: " << hashkey << "= " << record.id << " (record.id) % " << (pow((double)2, (double)8)) << "(2^8)" 
+        //         << endl;
 
         // first check if the 
         // first check if the _bit maps match?_
@@ -98,12 +98,16 @@ private:
         // these are the number of bits we want to compare
         int bit_mask = (1 << i) - 1;
 
-        if ((record.id & bit_mask) >= (n & bit_mask)) {
-            // cout << "last two bits are equal " <<  bit_mask << " " << record.id << endl;
-            cout << "last two bits are equal " <<  bit_mask << " " << record.id << ": record.id & bit_mask(" << 
-                    (record.id & bit_mask) << "), n & bit_mask(" << (n & bit_mask) << ")" <<  endl;
+        // check if last i bits of haskey match the bit mask
+        // importantBits = last i bits of hashKey
+        // if ((record.id & bit_mask) >= (n & bit_mask)) {
+        if ((hashkey & bit_mask) >= (n & bit_mask)) {
+            // cout << "last two bits are equal " <<  bit_mask << " " << hashkey << endl;
+            cout << "last two bits are equal " <<  bit_mask << " " << hashkey << ": hashkey & bit_mask(" << 
+                    (hashkey & bit_mask) << "), n & bit_mask(" << (n & bit_mask) << ")" <<  endl;
+            
         }else{
-            cout << "last are not equal " << bit_mask << " " << record.id  << endl;
+            cout << "last are not equal " << bit_mask << " " << hashkey  << endl;
         }
 
         
@@ -208,6 +212,10 @@ public:
         // if record not found, give record null (-1) values
         Record null_record = Record({"-1", "-1", "-1", "-1"});
         return null_record;
+    }
+
+    int findHashKey(int id) {
+        return id % ((int)pow((double)2, (double)8));
     }
 
  
