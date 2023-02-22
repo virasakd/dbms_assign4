@@ -87,6 +87,11 @@ private:
          outfile.close();
 
 
+        // find hashkey: ID % 2^8
+        int hashkey = record.id % (int)pow((double)2, (double)8);
+        cout << "hashkey: " << hashkey << "= " << record.id << " (record.id) % " << (pow((double)2, (double)8)) << "(2^8)" 
+                << endl;
+
         // first check if the 
         // first check if the _bit maps match?_
         
@@ -94,7 +99,9 @@ private:
         int bit_mask = (1 << i) - 1;
 
         if ((record.id & bit_mask) >= (n & bit_mask)) {
-            cout << "last two bits are equal " <<  bit_mask << " " << record.id << endl;
+            // cout << "last two bits are equal " <<  bit_mask << " " << record.id << endl;
+            cout << "last two bits are equal " <<  bit_mask << " " << record.id << ": record.id & bit_mask(" << 
+                    (record.id & bit_mask) << "), n & bit_mask(" << (n & bit_mask) << ")" <<  endl;
         }else{
             cout << "last are not equal " << bit_mask << " " << record.id  << endl;
         }
@@ -114,6 +121,11 @@ private:
         outfile.close();
 
         // Add record to the index in the correct block, creating a overflow block if necessary
+
+        
+        // outfile.open(fName, ios::out | ios::app);
+        // outfile.seekp(0*BLOCK_SIZE,ios::beg);
+        // outfile.close();
 
 
         // Take neccessary steps if capacity is reached:
